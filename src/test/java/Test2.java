@@ -3,10 +3,15 @@ package com.example.tests;
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
+
+import static com.sun.tools.internal.ws.wsdl.parser.Util.fail;
+import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.After;
+import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.*;
 public class Test2 {
@@ -17,20 +22,20 @@ public class Test2 {
 
   @Before
   public void setUp() throws Exception {
-    driver = new FirefoxDriver();
+    driver = new HtmlUnitDriver();
     baseUrl = "https://www.imdb.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
   @Test
   public void test2() throws Exception {
-    driver.get("https://www.imdb.com/");https://www.imdb.com/
+    driver.get("https://www.imdb.com/"); //https://www.imdb.com/
     String searchTerm = "Star Wars";
     driver.findElement(By.id("navbar-query")).clear();
     driver.findElement(By.id("navbar-query")).sendKeys(searchTerm);
     driver.findElement(By.id("navbar-submit-button")).click();
     driver.findElement(By.xpath("//td[2]/a")).click();
-    assertTrue(driver.getTitle().matches("^regexpi:\\.[\\s\\S]*\\$\\{searchTerm\\}\\.[\\s\\S]*$"));
+    assertTrue(driver.getTitle().matches(".*"+searchTerm+".*"));
   }
 
   @After
