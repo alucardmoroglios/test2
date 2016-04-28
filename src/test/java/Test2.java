@@ -30,7 +30,7 @@ public class Test2 {
   @Test
   public void test2() throws Exception {
     driver.get("https://www.imdb.com/"); //https://www.imdb.com/
-    String searchTerm = "Star Wars";
+    String searchTerm = "godfather";
     driver.findElement(By.id("navbar-query")).clear();
     driver.findElement(By.id("navbar-query")).sendKeys(searchTerm);
     driver.findElement(By.id("navbar-submit-button")).click();
